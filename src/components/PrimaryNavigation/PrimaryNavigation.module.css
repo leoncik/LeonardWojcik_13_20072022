@@ -1,0 +1,10 @@
+.main-nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header-logo {
+    display: flex;
+    flex-direction: column;
+}
