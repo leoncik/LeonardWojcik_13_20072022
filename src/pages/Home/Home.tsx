@@ -1,8 +1,16 @@
+// CSS
+import Hero from '../../components/Hero/Hero';
+import classes from './Home.module.css';
+
 function Home() {
     return (
-        <div className="home-content">
-            <p>{"Bienvenue sur la page d'accueil !"}</p>
-        </div>
+        <main>
+            <div className={classes['hero']}>
+                <section className={classes['hero-content']}>
+                    <Hero />
+                </section>
+            </div>
+        </main>
     );
 }
 
