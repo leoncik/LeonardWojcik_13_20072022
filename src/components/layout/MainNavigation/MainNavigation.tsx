@@ -7,6 +7,8 @@ import classes from './MainNavigation.module.css';
 // Assets
 import logo from '../../../assets/images/argentBankLogo.png';
 
+// Todo : add margin-right to "<i className='fa fa-user-circle'></i>" ?
+
 function MainNavigation() {
     return (
         <nav className={classes['main-nav']}>
@@ -20,7 +22,7 @@ function MainNavigation() {
             </NavLink>
             <div>
                 <NavLink className={classes['main-nav-item']} to="/page">
-                    <i className={classes['fa fa-user-circle']}></i>
+                    <i className="fa fa-user-circle"></i>
                     Sign In
                 </NavLink>
             </div>
