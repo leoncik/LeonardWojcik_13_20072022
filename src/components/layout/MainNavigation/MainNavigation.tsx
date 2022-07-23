@@ -21,7 +21,7 @@ function MainNavigation() {
                 <h1 className={classes['sr-only']}>Argent Bank</h1>
             </NavLink>
             <div>
-                <NavLink className={classes['main-nav-item']} to="/page">
+                <NavLink className={classes['main-nav-item']} to="/sign-in">
                     <i className="fa fa-user-circle"></i>
                     Sign In
                 </NavLink>
