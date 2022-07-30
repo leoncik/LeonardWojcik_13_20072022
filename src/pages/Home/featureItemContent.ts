@@ -3,7 +3,7 @@ import iconChat from '../../assets/images/icon-chat.png';
 import iconMoney from '../../assets/images/icon-money.png';
 import iconSecurity from '../../assets/images/icon-security.png';
 
-interface IFeatureItemContent {
+export interface IFeatureItemContent {
     imageSrc: string;
     imageAlt: string;
     featureTitle: string;

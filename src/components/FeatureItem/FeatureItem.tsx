@@ -1,12 +1,10 @@
 // CSS
 import classes from './FeatureItem.module.css';
 
-type FeatureItemProps = {
-    imageSrc: string;
-    imageAlt: string;
-    featureTitle: string;
-    featureDescription: string;
-};
+// Interfaces
+import { IFeatureItemContent } from '../../pages/Home/featureItemContent';
+
+type FeatureItemProps = IFeatureItemContent;
 
 function FeatureItem({
     imageSrc,
