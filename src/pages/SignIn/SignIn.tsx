@@ -1,6 +1,10 @@
 // Routing
 import { Link } from 'react-router-dom';
 
+// Page components
+import GenericForm from '../../components/layout/GenericForm/GenericForm';
+import GenericLabelInput from '../../components/layout/GenericLabelInput/GenericLabelInput';
+
 // CSS
 import classes from './SignIn.module.css';
 
@@ -10,26 +14,32 @@ function SignIn() {
             <section className={classes['sign-in-content']}>
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
-                <form>
-                    <div className={classes['input-wrapper']}>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" id="username" />
-                    </div>
-                    <div className={classes['input-wrapper']}>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" />
-                    </div>
-                    <div className={classes['input-remember']}>
-                        <input type="checkbox" id="remember-me" />
-                        <label htmlFor="remember-me">Remember me</label>
-                    </div>
+                <GenericForm>
+                    <GenericLabelInput
+                        cssClasses={'input-wrapper'}
+                        label={{ for: 'username', text: 'Username' }}
+                        inputType={'text'}
+                        inputId={'username'}
+                    />
+                    <GenericLabelInput
+                        cssClasses={'input-wrapper'}
+                        label={{ for: 'password', text: 'Password' }}
+                        inputType={'password'}
+                        inputId={'password'}
+                    />
+                    <GenericLabelInput
+                        cssClasses={'input-remember'}
+                        label={{ for: 'remember-me', text: 'Remember me' }}
+                        inputType={'checkbox'}
+                        inputId={'remember-me'}
+                    />
                     {/* PLACEHOLDER DUE TO STATIC SITE */}
                     <Link to="/user" className={classes['sign-in-button']}>
                         Sign In
                     </Link>
                     {/* SHOULD BE THE BUTTON BELOW */}
                     {/* <button className="sign-in-button">Sign In</button> */}
-                </form>
+                </GenericForm>
             </section>
         </main>
     );
