@@ -1,3 +1,6 @@
+// Interfaces
+import { IUserLoginInfo } from '../interfaces/apiInterfaces';
+
 /**
  * Fetches data from url.
  * @param {string} url - Fetched url
@@ -18,15 +21,22 @@ export const genericFetch = async (
     return responseObject;
 };
 
+/**
+ * Fetches data from url.
+ * @param {string} apiEndpoint - Fetched url
+ * @param {string} requestBody  - body send with POST method
+ * @returns {}
+ */
 export const genericPostRequest = async (
-    url: string,
-    method = 'POST',
-    headers = {}
+    apiEndpoint: string,
+    requestBody: IUserLoginInfo
 ) => {
-    const response = await fetch(url, { method, headers });
-    const body = await response.json();
-    const { status } = response;
-    const isSuccess = false;
-    const responseObject = { status, body, isSuccess };
-    return responseObject;
+    const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
 };

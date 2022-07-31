@@ -10,6 +10,7 @@ import { useRef, useState } from 'react';
 
 // Helpers
 import * as endpoint from '../../helpers/apiEndpoints';
+import { genericPostRequest } from '../../helpers/fetchHandlers';
 // import { genericPostRequest } from '../../helpers/fetchHandlers';
 
 // CSS
@@ -41,28 +42,9 @@ function SignIn() {
 
         setIsPending(true);
 
-        // Temporary test function
-        const testPostRequest = async () => {
-            const response = await fetch(endpoint.userLoginEndpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userLoginInfo),
-            });
-            const data = await response.json();
-            setIsPending(false);
-            console.log(data);
-            return data;
-        };
-        testPostRequest();
+        genericPostRequest(endpoint.userLoginEndpoint, userLoginInfo);
 
-        // Tests
-        // genericPostRequest(endpoint.userLoginEndpoint, "POST", { "Content-Type": "application/json" }  )
-
-        // fetch(endpoint.userLoginEndpoint , {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json"},
-        //     body: JSON.stringify(userLoginInfo)
-        // })
+        setIsPending(false);
     };
 
     return (
