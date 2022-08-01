@@ -2,6 +2,7 @@
 import { useRef, useState } from 'react';
 
 // Routing
+import { Navigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
 // Page components
@@ -22,6 +23,7 @@ import classes from './SignIn.module.css';
 function SignIn() {
     // States
     const [isPending, setIsPending] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // References
     const userNameInputRef = useRef<HTMLInputElement>(null);
@@ -58,9 +60,10 @@ function SignIn() {
         console.log(userProfile);
 
         setIsPending(false);
+        setIsLoggedIn(true);
     };
 
-    return (
+    return !isLoggedIn ? (
         <main className={classes['bg-dark']}>
             <section className={classes['sign-in-content']}>
                 <i className="fa fa-user-circle sign-in-icon"></i>
@@ -126,6 +129,8 @@ function SignIn() {
                 </GenericForm> */}
             </section>
         </main>
+    ) : (
+        <Navigate replace to="/user" />
     );
 }
 
