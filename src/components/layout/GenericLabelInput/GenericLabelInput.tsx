@@ -1,5 +1,6 @@
 import classes from './GenericLabelInput.module.css';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type GenericLabelInputProps = {
     cssClasses: string;
     label: {
@@ -8,18 +9,21 @@ type GenericLabelInputProps = {
     };
     inputType: string;
     inputId: string;
+    inputRef: any;
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 function GenericLabelInput({
     cssClasses,
     label,
     inputType,
     inputId,
+    inputRef,
 }: GenericLabelInputProps) {
     return (
         <div className={classes[`${cssClasses}`]}>
             <label htmlFor={label.for}>{label.text}</label>
-            <input type={inputType} id={inputId} />
+            <input type={inputType} id={inputId} ref={inputRef} />
         </div>
     );
 }
