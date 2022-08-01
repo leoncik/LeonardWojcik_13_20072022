@@ -3,26 +3,6 @@ import { IUserLoginInfo } from '../interfaces/apiInterfaces';
 
 /**
  * Fetches data from url.
- * @param {string} url - Fetched url
- * @param {string} method  - Fetch method (set by default to 'GET')
- * @param headers
- * @returns {}
- */
-export const genericFetch = async (
-    url: string,
-    method = 'GET',
-    headers = {}
-) => {
-    const response = await fetch(url, { method, headers });
-    const body = await response.json();
-    const { status } = response;
-    const isSuccess = false;
-    const responseObject = { status, body, isSuccess };
-    return responseObject;
-};
-
-/**
- * Fetches data from url.
  * @param {string} apiEndpoint - Fetched url
  * @param {string} requestBody  - body send with POST method
  * @returns {}
@@ -37,6 +17,26 @@ export const genericPostRequest = async (
         body: JSON.stringify(requestBody),
     });
     const data = await response.json();
-    console.log(data);
+    return data;
+};
+
+/**
+ * Send a POST request to authenticate user.
+ * @param apiEndpoint - Fetched URL
+ * @param token - user's token
+ * @returns
+ */
+export const authenticationRequest = async (
+    apiEndpoint: string,
+    token: string
+) => {
+    const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    const data = await response.json();
     return data;
 };

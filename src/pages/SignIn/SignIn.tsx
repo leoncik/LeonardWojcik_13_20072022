@@ -10,7 +10,10 @@ import { useRef, useState } from 'react';
 
 // Helpers
 import * as endpoint from '../../helpers/apiEndpoints';
-import { genericPostRequest } from '../../helpers/fetchHandlers';
+import {
+    genericPostRequest,
+    authenticationRequest,
+} from '../../helpers/fetchHandlers';
 // import { genericPostRequest } from '../../helpers/fetchHandlers';
 
 // CSS
@@ -26,7 +29,7 @@ function SignIn() {
     const userRememberInputRef = useRef<HTMLInputElement>(null);
 
     // Todo : replace Username with email.
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const enteredName = userNameInputRef?.current?.value;
         const enteredPassword = userPasswordInputRef?.current?.value;
@@ -42,7 +45,17 @@ function SignIn() {
 
         setIsPending(true);
 
-        genericPostRequest(endpoint.userLoginEndpoint, userLoginInfo);
+        const requestResponse = await genericPostRequest(
+            endpoint.userLoginEndpoint,
+            userLoginInfo
+        );
+        const token = requestResponse.body.token;
+
+        const userProfile = await authenticationRequest(
+            endpoint.userProfileEndpoint,
+            token
+        );
+        console.log(userProfile);
 
         setIsPending(false);
     };
