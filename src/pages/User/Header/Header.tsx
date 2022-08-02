@@ -1,14 +1,28 @@
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+// CSS
 import classes from './Header.module.css';
 
 function Header() {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const dispatch = useDispatch();
+    const userName = useSelector((state: any) => state.name);
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+
     return (
         <div className={classes['header']}>
             <h1>
                 Welcome back
                 <br />
-                Tony Jarvis!
+                {userName}
             </h1>
-            <button className={classes['edit-button']}>Edit Name</button>
+            <button
+                onClick={() => dispatch({ type: 'editUserName' })}
+                className={classes['edit-button']}
+            >
+                Edit Name
+            </button>
         </div>
     );
 }

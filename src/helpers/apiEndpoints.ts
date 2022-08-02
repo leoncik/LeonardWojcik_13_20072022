@@ -14,7 +14,6 @@ const userLoginEndpoint = `${apiBaseUrl}/user/login`;
  */
 const userSignUpEndpoint = `${apiBaseUrl}/user/signup`;
 
-//  Todo : check fetch method (described as POST in documentation but should be GET)
 /**
  * Fetch a user profile
  * Request type : POST or PUT

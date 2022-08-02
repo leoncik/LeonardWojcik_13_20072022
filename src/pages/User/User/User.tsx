@@ -5,6 +5,8 @@ import Header from '../Header/Header';
 // CSS
 import classes from './User.module.css';
 
+// Todo : prevent access to page when directly accessing with URL
+
 function User() {
     return (
         <main className={classes['bg-dark']}>
