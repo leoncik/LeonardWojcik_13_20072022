@@ -3,11 +3,14 @@ import { createStore } from 'redux';
 // Initial state (test)
 const initialState = {
     name: 'Schopenhauer',
+    editNameFields: false,
 };
 
 // Action Creators
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const editUserName = () => ({ type: editUserName });
+const showEditNameFields = () => ({ type: showEditNameFields });
+const hideEditNameFields = () => ({ type: hideEditNameFields });
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 // Reducer
@@ -17,6 +20,18 @@ function reducer(state = initialState, action: any) {
         return {
             ...state,
             name: 'Kant',
+        };
+    }
+    if (action.type === 'showEditNameFields') {
+        return {
+            ...state,
+            editNameFields: true,
+        };
+    }
+    if (action.type === 'hideEditNameFields') {
+        return {
+            ...state,
+            editNameFields: false,
         };
     }
 
