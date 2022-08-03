@@ -1,11 +1,12 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
+import GenericButton from '../../../components/layout/GenericButton/GenericButton';
 
 // Page components
 import GenericForm from '../../../components/layout/GenericForm/GenericForm';
 
 // CSS
-// import classes from './UpdateProfile.module.css';
+import classes from './UpdateProfile.module.css';
 
 function UpdateProfile() {
     /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -26,10 +27,26 @@ function UpdateProfile() {
 
     return isEditProfile ? (
         <GenericForm submitFunction={null}>
-            <input type="text" placeholder="First name" />
-            <input type="text" placeholder="Last name" />
-            <button onClick={handleSubmit}>Save</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <div className={classes['input-fields']}>
+                <input type="text" placeholder="First name" />
+                <input type="text" placeholder="Last name" />
+            </div>
+            <div className={classes['buttons']}>
+                <GenericButton
+                    cssClasses={'edit-profile-button'}
+                    isActive={true}
+                    action={handleSubmit}
+                >
+                    Save
+                </GenericButton>
+                <GenericButton
+                    cssClasses={'edit-profile-button'}
+                    isActive={true}
+                    action={handleCancel}
+                >
+                    Cancel
+                </GenericButton>
+            </div>
         </GenericForm>
     ) : null;
 }

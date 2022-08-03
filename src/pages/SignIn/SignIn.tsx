@@ -7,6 +7,7 @@ import { Navigate } from 'react-router-dom';
 // Page components
 import GenericForm from '../../components/layout/GenericForm/GenericForm';
 import GenericLabelInput from '../../components/layout/GenericLabelInput/GenericLabelInput';
+import GenericButton from '../../components/layout/GenericButton/GenericButton';
 
 // Helpers
 import * as endpoint from '../../helpers/apiEndpoints';
@@ -92,15 +93,22 @@ function SignIn() {
                         inputRef={userRememberInputRef}
                     />
                     {/* SIGN IN BUTTON */}
-                    {!isPending && (
-                        <button className={classes['sign-in-button']}>
-                            Sign In
-                        </button>
-                    )}
-                    {isPending && (
-                        <button disabled className={classes['sign-in-button']}>
+                    {isPending ? (
+                        <GenericButton
+                            cssClasses={'sign-in-button'}
+                            isActive={false}
+                            action={null}
+                        >
                             Connexion…
-                        </button>
+                        </GenericButton>
+                    ) : (
+                        <GenericButton
+                            cssClasses={'sign-in-button'}
+                            isActive={true}
+                            action={null}
+                        >
+                            Sign In
+                        </GenericButton>
                     )}
                 </GenericForm>
             </section>
