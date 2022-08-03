@@ -21,6 +21,7 @@ import {
 
 // CSS
 import classes from './SignIn.module.css';
+import ErrorFormField from '../../components/layout/ErrorFormField/ErrorFormField';
 
 function SignIn() {
     // Redux
@@ -29,6 +30,7 @@ function SignIn() {
     // States
     const [isPending, setIsPending] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggingFailed, setIsLoggingFailed] = useState(false);
 
     // References
     const userNameInputRef = useRef<HTMLInputElement>(null);
@@ -56,17 +58,22 @@ function SignIn() {
             endpoint.userLoginEndpoint,
             userLoginInfo
         );
-        const token = requestResponse.body.token;
+        if (requestResponse.status === 400) {
+            setIsLoggingFailed(true);
+        }
+        const token = requestResponse?.body?.token;
 
         const userProfile = await authenticationRequest(
             endpoint.userProfileEndpoint,
             token
         );
         console.log(userProfile);
-        dispatch({ type: 'setIsLoggedIn' });
+        if (userProfile.status === 200) {
+            dispatch({ type: 'setIsLoggedIn' });
+            setIsLoggedIn(true);
+        }
 
         setIsPending(false);
-        setIsLoggedIn(true);
     };
 
     return !isLoggedIn ? (
@@ -74,6 +81,7 @@ function SignIn() {
             <section className={classes['sign-in-content']}>
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
+                {isLoggingFailed ? <ErrorFormField /> : null}
                 <GenericForm submitFunction={handleSubmit}>
                     {/* USERNAME */}
                     <GenericLabelInput
