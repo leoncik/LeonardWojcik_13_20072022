@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 const initialState = {
     name: 'Schopenhauer',
     editNameFields: false,
+    isLoggedIn: false,
 };
 
 // Action Creators
@@ -11,6 +12,8 @@ const initialState = {
 const editUserName = () => ({ type: editUserName });
 const showEditNameFields = () => ({ type: showEditNameFields });
 const hideEditNameFields = () => ({ type: hideEditNameFields });
+const setIsLoggedIn = () => ({ type: setIsLoggedIn });
+const setIsLoggedOut = () => ({ type: setIsLoggedOut });
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 // Reducer
@@ -32,6 +35,18 @@ function reducer(state = initialState, action: any) {
         return {
             ...state,
             editNameFields: false,
+        };
+    }
+    if (action.type === 'setIsLoggedIn') {
+        return {
+            ...state,
+            isLoggedIn: true,
+        };
+    }
+    if (action.type === 'setIsLoggedOut') {
+        return {
+            ...state,
+            isLoggedIn: false,
         };
     }
 

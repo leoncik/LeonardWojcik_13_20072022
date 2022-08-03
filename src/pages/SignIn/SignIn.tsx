@@ -1,3 +1,6 @@
+// Redux
+import { useDispatch } from 'react-redux';
+
 // React Hooks
 import { useRef, useState } from 'react';
 
@@ -20,6 +23,9 @@ import {
 import classes from './SignIn.module.css';
 
 function SignIn() {
+    // Redux
+    const dispatch = useDispatch();
+
     // States
     const [isPending, setIsPending] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -57,6 +63,7 @@ function SignIn() {
             token
         );
         console.log(userProfile);
+        dispatch({ type: 'setIsLoggedIn' });
 
         setIsPending(false);
         setIsLoggedIn(true);
