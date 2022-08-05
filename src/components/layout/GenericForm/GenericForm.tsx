@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type GenericFormProps = {
     children: React.ReactNode;
-    submitFunction: any;
+    submitFunction: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
 };
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 function GenericForm({ children, submitFunction }: GenericFormProps) {
     return <form onSubmit={submitFunction}>{children}</form>;

@@ -12,7 +12,10 @@ const initialState = {
 const editUserName = () => ({ type: editUserName });
 const showEditNameFields = () => ({ type: showEditNameFields });
 const hideEditNameFields = () => ({ type: hideEditNameFields });
-const setIsLoggedIn = () => ({ type: setIsLoggedIn });
+const setIsLoggedIn = (username: string) => ({
+    type: setIsLoggedIn,
+    payload: username,
+});
 const setIsLoggedOut = () => ({ type: setIsLoggedOut });
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
@@ -41,6 +44,7 @@ function reducer(state = initialState, action: any) {
         return {
             ...state,
             isLoggedIn: true,
+            name: action.payload,
         };
     }
     if (action.type === 'setIsLoggedOut') {

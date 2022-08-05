@@ -69,7 +69,10 @@ function SignIn() {
         );
         console.log(userProfile);
         if (userProfile.status === 200) {
-            dispatch({ type: 'setIsLoggedIn' });
+            dispatch({
+                type: 'setIsLoggedIn',
+                payload: userProfile.body.firstName,
+            });
             setIsLoggedIn(true);
         }
 
