@@ -16,8 +16,20 @@ export interface IUserSignup {
 export interface IUserProfile {
     status: number | undefined;
     message: string | undefined;
-    body: {
-        id: string | undefined;
-        email: string | undefined;
-    };
+    body: IUserProfileBody | undefined;
+}
+
+export interface IUserProfileBody {
+    createdAt: string | undefined;
+    email: string | undefined;
+    firstName: string | undefined;
+    id: string | undefined;
+    lastName: string | undefined;
+    updatedAt: string | undefined;
+}
+
+// User name
+export interface IUserName {
+    firstName: string | undefined;
+    lastName: string | undefined;
 }

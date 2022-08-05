@@ -62,6 +62,10 @@ function SignIn() {
             setIsLoggingFailed(true);
         }
         const token = requestResponse?.body?.token;
+        dispatch({
+            type: 'setToken',
+            payload: token,
+        });
 
         const userProfile = await authenticationRequest(
             endpoint.userProfileEndpoint,
@@ -71,7 +75,7 @@ function SignIn() {
         if (userProfile.status === 200) {
             dispatch({
                 type: 'setIsLoggedIn',
-                payload: userProfile.body.firstName,
+                payload: userProfile,
             });
             setIsLoggedIn(true);
         }

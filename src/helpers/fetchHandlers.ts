@@ -1,5 +1,6 @@
 // Interfaces
 import { IUserLoginInfo } from '../interfaces/apiInterfaces';
+import { IUserName } from '../interfaces/apiInterfaces';
 
 /**
  * Fetches data from url.
@@ -36,6 +37,29 @@ export const authenticationRequest = async (
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
+    });
+    const data = await response.json();
+    return data;
+};
+
+/**
+ * Send a PUT request.
+ * @param {string} apiEndpoint - Fetched url
+ * @param {string} requestBody  - body send with PUT method
+ * @returns {}
+ */
+export const genericPutRequest = async (
+    apiEndpoint: string,
+    requestBody: IUserName,
+    token: string
+) => {
+    const response = await fetch(apiEndpoint, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(requestBody),
     });
     const data = await response.json();
     return data;

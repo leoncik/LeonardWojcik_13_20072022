@@ -10,7 +10,7 @@ import classes from './Header.module.css';
 function Header() {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const dispatch = useDispatch();
-    const userName = useSelector((state: any) => state.name);
+    const userName = useSelector((state: any) => state.userFirstName);
     const isEditProfile = useSelector((state: any) => state.editNameFields);
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -25,7 +25,6 @@ function Header() {
             {!isEditProfile ? (
                 <button
                     onClick={() => {
-                        dispatch({ type: 'editUserName' });
                         dispatch({ type: 'showEditNameFields' });
                     }}
                     className={classes['edit-button']}

@@ -1,20 +1,33 @@
 import { createStore } from 'redux';
 
+// Interfaces
+import { IUserProfile, IUserName } from './interfaces/apiInterfaces';
+
 // Initial state (test)
 const initialState = {
-    name: 'Schopenhauer',
+    userFirstName: '',
+    userLastName: '',
     editNameFields: false,
     isLoggedIn: false,
+    token: '',
 };
 
 // Action Creators
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const editUserName = () => ({ type: editUserName });
+const editUserName = (userName: IUserName) => ({
+    type: editUserName,
+    payload: userName,
+});
 const showEditNameFields = () => ({ type: showEditNameFields });
 const hideEditNameFields = () => ({ type: hideEditNameFields });
-const setIsLoggedIn = (username: string) => ({
+
+const setToken = (token: string) => ({
+    type: setToken,
+    payload: token,
+});
+const setIsLoggedIn = (userProfile: IUserProfile) => ({
     type: setIsLoggedIn,
-    payload: username,
+    payload: userProfile,
 });
 const setIsLoggedOut = () => ({ type: setIsLoggedOut });
 /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -25,7 +38,8 @@ function reducer(state = initialState, action: any) {
     if (action.type === 'editUserName') {
         return {
             ...state,
-            name: 'Kant',
+            userFirstName: action.payload.firstName,
+            userLastName: action.payload.lastName,
         };
     }
     if (action.type === 'showEditNameFields') {
@@ -44,13 +58,19 @@ function reducer(state = initialState, action: any) {
         return {
             ...state,
             isLoggedIn: true,
-            name: action.payload,
+            userFirstName: action.payload.body.firstName,
         };
     }
     if (action.type === 'setIsLoggedOut') {
         return {
             ...state,
             isLoggedIn: false,
+        };
+    }
+    if (action.type === 'setToken') {
+        return {
+            ...state,
+            token: action.payload,
         };
     }
 

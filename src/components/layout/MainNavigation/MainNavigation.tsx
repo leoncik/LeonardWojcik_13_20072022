@@ -18,7 +18,7 @@ function MainNavigation() {
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const isLoggedIn = useSelector((state: any) => state.isLoggedIn);
-    const userName = useSelector((state: any) => state.name);
+    const userName = useSelector((state: any) => state.userFirstName);
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
     const logoutRef = useRef<HTMLAnchorElement>(null);
