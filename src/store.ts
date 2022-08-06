@@ -9,6 +9,7 @@ const initialState = {
     userLastName: '',
     editNameFields: false,
     isLoggedIn: false,
+    requestedPageWithoutLoggingIn: false,
     token: '',
 };
 
@@ -25,6 +26,8 @@ const setToken = (token: string) => ({
     type: setToken,
     payload: token,
 });
+const fetchWithoutLoggingIn = () => ({ type: fetchWithoutLoggingIn });
+const redirectedNotLoggedIn = () => ({ type: redirectedNotLoggedIn });
 const setIsLoggedIn = (userProfile: IUserProfile) => ({
     type: setIsLoggedIn,
     payload: userProfile,
@@ -52,6 +55,19 @@ function reducer(state = initialState, action: any) {
         return {
             ...state,
             editNameFields: false,
+        };
+    }
+
+    if (action.type === 'fetchWithoutLoggingIn') {
+        return {
+            ...state,
+            requestedPageWithoutLoggingIn: true,
+        };
+    }
+    if (action.type === 'redirectedNotLoggedIn') {
+        return {
+            ...state,
+            requestedPageWithoutLoggingIn: false,
         };
     }
     if (action.type === 'setIsLoggedIn') {

@@ -1,5 +1,5 @@
 // Redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // React Hooks
 import { useRef, useState } from 'react';
@@ -27,6 +27,11 @@ import ErrorFormMessage from '../../components/layout/ErrorFormMessage/ErrorForm
 function SignIn() {
     // Redux
     const dispatch = useDispatch();
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const hasBeenRedirected = useSelector(
+        (state: any) => state.requestedPageWithoutLoggingIn
+    );
+    /* eslint-enable @typescript-eslint/no-explicit-any */
 
     // States
     const [isPending, setIsPending] = useState(false);
@@ -38,9 +43,12 @@ function SignIn() {
     const userPasswordInputRef = useRef<HTMLInputElement>(null);
     const userRememberInputRef = useRef<HTMLInputElement>(null);
 
-    // Todo : replace Username with email.
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // Clear previous error message if user has been redirected
+        hasBeenRedirected && dispatch({ type: 'redirectedNotLoggedIn' });
+
         const enteredName = userNameInputRef?.current?.value;
         const enteredPassword = userPasswordInputRef?.current?.value;
         // const enteredRemember = userRememberInputRef.current.checked;
@@ -94,11 +102,16 @@ function SignIn() {
                         message={notificationMessages.failedSignIn}
                     />
                 ) : null}
+                {hasBeenRedirected ? (
+                    <ErrorFormMessage
+                        message={notificationMessages.notLoggedIn}
+                    />
+                ) : null}
                 <GenericForm submitFunction={handleSubmit}>
                     {/* USERNAME */}
                     <GenericLabelInput
                         cssClasses={'input-wrapper'}
-                        label={{ for: 'username', text: 'Username' }}
+                        label={{ for: 'username', text: 'Email' }}
                         inputType={'text'}
                         inputId={'username'}
                         inputRef={userNameInputRef}
