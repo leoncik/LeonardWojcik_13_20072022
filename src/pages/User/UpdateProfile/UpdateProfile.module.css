@@ -26,3 +26,15 @@
     border: none;
     border-radius: 3px;
 }
+
+.first-name-input-error,
+.last-name-input-error {
+    color: red;
+}
+
+.first-name-input-error {
+    text-align: end;
+}
+.last-name-input-error {
+    text-align: start;
+}

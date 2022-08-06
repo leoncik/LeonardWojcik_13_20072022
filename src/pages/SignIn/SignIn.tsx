@@ -18,10 +18,11 @@ import {
     genericPostRequest,
     authenticationRequest,
 } from '../../helpers/fetchHandlers';
+import { notificationMessages } from '../../helpers/notificationMessages';
 
 // CSS
 import classes from './SignIn.module.css';
-import ErrorFormField from '../../components/layout/ErrorFormField/ErrorFormField';
+import ErrorFormMessage from '../../components/layout/ErrorFormMessage/ErrorFormMessage';
 
 function SignIn() {
     // Redux
@@ -88,7 +89,11 @@ function SignIn() {
             <section className={classes['sign-in-content']}>
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
-                {isLoggingFailed ? <ErrorFormField /> : null}
+                {isLoggingFailed ? (
+                    <ErrorFormMessage
+                        message={notificationMessages.failedSignIn}
+                    />
+                ) : null}
                 <GenericForm submitFunction={handleSubmit}>
                     {/* USERNAME */}
                     <GenericLabelInput
