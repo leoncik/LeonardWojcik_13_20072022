@@ -10,7 +10,8 @@ import classes from './Header.module.css';
 function Header() {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const dispatch = useDispatch();
-    const userName = useSelector((state: any) => state.userFirstName);
+    const firstName = useSelector((state: any) => state.userFirstName);
+    const lastName = useSelector((state: any) => state.userLastName);
     const isEditProfile = useSelector((state: any) => state.editNameFields);
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -19,7 +20,7 @@ function Header() {
             <h1>
                 Welcome back
                 <br />
-                {userName}
+                {`${firstName} ${lastName}`}
             </h1>
             <UpdateProfile />
             {!isEditProfile ? (

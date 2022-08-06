@@ -1,4 +1,28 @@
-.buttons {
+.buttons,
+.input-fields {
     display: flex;
     justify-content: center;
+    gap: 20px;
+}
+
+.input-fields input {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    padding-left: 10px;
+    font-size: 1.2rem;
+}
+
+/* Todo: move style to "genericButton ? */
+.buttons > :first-child {
+    box-shadow: 0 0 0.15em 0.15em rgb(0, 188, 119);
+}
+.buttons > :last-child {
+    box-shadow: 0 0 0.15em 0.15em rgb(41, 0, 136);
+}
+
+.input-fields input {
+    height: 35px;
+    width: 200px;
+    box-shadow: 0 0 0.15em 0.15em rgb(184, 196, 207);
+    border: none;
+    border-radius: 3px;
 }

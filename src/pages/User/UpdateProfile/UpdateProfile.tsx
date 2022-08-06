@@ -25,6 +25,8 @@ function UpdateProfile() {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const isEditProfile = useSelector((state: any) => state.editNameFields);
     const token = useSelector((state: any) => state.token);
+    const firstName = useSelector((state: any) => state.userFirstName);
+    const lastName = useSelector((state: any) => state.userLastName);
     /* eslint-enable @typescript-eslint/no-explicit-any */
     console.log(isEditProfile);
 
@@ -66,12 +68,12 @@ function UpdateProfile() {
             <div className={classes['input-fields']}>
                 <input
                     type="text"
-                    placeholder="First name"
+                    placeholder={firstName}
                     ref={userFirstNameInputRef}
                 />
                 <input
                     type="text"
-                    placeholder="Last name"
+                    placeholder={lastName}
                     ref={userLastNameInputRef}
                 />
             </div>

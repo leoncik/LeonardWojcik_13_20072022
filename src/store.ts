@@ -59,6 +59,7 @@ function reducer(state = initialState, action: any) {
             ...state,
             isLoggedIn: true,
             userFirstName: action.payload.body.firstName,
+            userLastName: action.payload.body.lastName,
         };
     }
     if (action.type === 'setIsLoggedOut') {
