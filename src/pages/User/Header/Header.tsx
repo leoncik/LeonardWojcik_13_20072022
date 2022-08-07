@@ -1,6 +1,9 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 
+// React Hooks
+import { useEffect } from 'react';
+
 // Page components
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
 
@@ -14,6 +17,11 @@ function Header() {
     const lastName = useSelector((state: any) => state.userLastName);
     const isEditProfile = useSelector((state: any) => state.editNameFields);
     /* eslint-enable @typescript-eslint/no-explicit-any */
+
+    // Close UpdateProfile component when landing on page if It was previously open
+    useEffect(() => {
+        isEditProfile && dispatch({ type: 'hideEditNameFields' });
+    }, []);
 
     return (
         <div className={classes['header']}>
