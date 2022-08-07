@@ -1,6 +1,6 @@
 // Page components
 import Home from '../../pages/Home/Home';
-import Error404 from '../../pages/Error404';
+import Error404 from '../../pages/Error404/Error404';
 import SignIn from '../../pages/SignIn/SignIn';
 import Footer from '../layout/Footer/Footer';
 import MainNavigation from '../layout/MainNavigation/MainNavigation';
