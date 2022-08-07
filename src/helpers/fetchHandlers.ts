@@ -2,6 +2,9 @@
 import { IUserLoginInfo } from '../interfaces/apiInterfaces';
 import { IUserName } from '../interfaces/apiInterfaces';
 
+// Helpers
+import { notificationMessages } from './notificationMessages';
+
 /**
  * Fetches data from url.
  * @param {string} apiEndpoint - Fetched url
@@ -12,13 +15,18 @@ export const genericPostRequest = async (
     apiEndpoint: string,
     requestBody: IUserLoginInfo
 ) => {
-    const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody),
-    });
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        const errorMessage = notificationMessages.failedSignIn;
+        return errorMessage;
+    }
 };
 
 /**
@@ -53,14 +61,18 @@ export const genericPutRequest = async (
     requestBody: IUserName,
     token: string
 ) => {
-    const response = await fetch(apiEndpoint, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(requestBody),
-    });
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(requestBody),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
 };

@@ -37,6 +37,7 @@ function SignIn() {
     const [isPending, setIsPending] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoggingFailed, setIsLoggingFailed] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     // References
     const userNameInputRef = useRef<HTMLInputElement>(null);
@@ -68,8 +69,18 @@ function SignIn() {
             userLoginInfo
         );
         if (requestResponse.status === 400) {
+            setErrorMessage(notificationMessages.failedSignIn);
             setIsLoggingFailed(true);
+            setIsPending(false);
         }
+        if (requestResponse === notificationMessages.failedSignIn) {
+            setErrorMessage(
+                'Could not find user. Please make sure that you have an account or try again later.'
+            );
+            setIsLoggingFailed(true);
+            setIsPending(false);
+        }
+
         const token = requestResponse?.body?.token;
         dispatch({
             type: 'setToken',
@@ -98,9 +109,7 @@ function SignIn() {
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
                 {isLoggingFailed ? (
-                    <ErrorFormMessage
-                        message={notificationMessages.failedSignIn}
-                    />
+                    <ErrorFormMessage message={errorMessage} />
                 ) : null}
                 {hasBeenRedirected ? (
                     <ErrorFormMessage
@@ -112,7 +121,7 @@ function SignIn() {
                     <GenericLabelInput
                         cssClasses={'input-wrapper'}
                         label={{ for: 'username', text: 'Email' }}
-                        inputType={'text'}
+                        inputType={'email'}
                         inputId={'username'}
                         inputRef={userNameInputRef}
                     />
