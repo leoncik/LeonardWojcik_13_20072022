@@ -1,7 +1,5 @@
-import { createStore } from 'redux';
-
-// Interfaces
-import { IUserProfile, IUserName } from './interfaces/apiInterfaces';
+import { configureStore } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
 // Initial state (test)
 const initialState = {
@@ -14,63 +12,54 @@ const initialState = {
 };
 
 // Action Creators
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const editUserName = (userName: IUserName) => ({
-    type: editUserName,
-    payload: userName,
-});
-const showEditNameFields = () => ({ type: showEditNameFields });
-const hideEditNameFields = () => ({ type: hideEditNameFields });
+const editUserName = createAction('editUserName');
+const hideEditNameFields = createAction('hideEditNameFields');
+const showEditNameFields = createAction('showEditNameFields');
 
-const setToken = (token: string) => ({
-    type: setToken,
-    payload: token,
-});
-const fetchWithoutLoggingIn = () => ({ type: fetchWithoutLoggingIn });
-const redirectedNotLoggedIn = () => ({ type: redirectedNotLoggedIn });
-const setIsLoggedIn = (userProfile: IUserProfile) => ({
-    type: setIsLoggedIn,
-    payload: userProfile,
-});
-const setIsLoggedOut = () => ({ type: setIsLoggedOut });
-/* eslint-enable @typescript-eslint/no-unused-vars */
+const setToken = createAction('setToken');
+
+const fetchWithoutLoggingIn = createAction('fetchWithoutLoggingIn');
+const redirectedNotLoggedIn = createAction('redirectedNotLoggedIn');
+
+const setIsLoggedIn = createAction('setIsLoggedIn');
+const setIsLoggedOut = createAction('setIsLoggedOut');
 
 // Reducer
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function reducer(state = initialState, action: any) {
-    if (action.type === 'editUserName') {
+    if (action.type === editUserName.toString()) {
         return {
             ...state,
             userFirstName: action.payload.firstName,
             userLastName: action.payload.lastName,
         };
     }
-    if (action.type === 'showEditNameFields') {
+    if (action.type === showEditNameFields.toString()) {
         return {
             ...state,
             editNameFields: true,
         };
     }
-    if (action.type === 'hideEditNameFields') {
+    if (action.type === hideEditNameFields.toString()) {
         return {
             ...state,
             editNameFields: false,
         };
     }
 
-    if (action.type === 'fetchWithoutLoggingIn') {
+    if (action.type === fetchWithoutLoggingIn.toString()) {
         return {
             ...state,
             requestedPageWithoutLoggingIn: true,
         };
     }
-    if (action.type === 'redirectedNotLoggedIn') {
+    if (action.type === redirectedNotLoggedIn.toString()) {
         return {
             ...state,
             requestedPageWithoutLoggingIn: false,
         };
     }
-    if (action.type === 'setIsLoggedIn') {
+    if (action.type === setIsLoggedIn.toString()) {
         return {
             ...state,
             isLoggedIn: true,
@@ -78,13 +67,13 @@ function reducer(state = initialState, action: any) {
             userLastName: action.payload.body.lastName,
         };
     }
-    if (action.type === 'setIsLoggedOut') {
+    if (action.type === setIsLoggedOut.toString()) {
         return {
             ...state,
             isLoggedIn: false,
         };
     }
-    if (action.type === 'setToken') {
+    if (action.type === setToken.toString()) {
         return {
             ...state,
             token: action.payload,
@@ -96,4 +85,6 @@ function reducer(state = initialState, action: any) {
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 // Store
-export const store = createStore(reducer, initialState);
+export const store = configureStore({
+    reducer: reducer,
+});
