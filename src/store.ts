@@ -1,7 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { createAction } from '@reduxjs/toolkit';
+import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 
-// Initial state (test)
+// Initial state
 const initialState = {
     userFirstName: '',
     userLastName: '',
@@ -26,62 +25,44 @@ const setIsLoggedOut = createAction('setIsLoggedOut');
 
 // Reducer
 /* eslint-disable @typescript-eslint/no-explicit-any */
-function reducer(state = initialState, action: any) {
-    if (action.type === editUserName.toString()) {
-        return {
-            ...state,
-            userFirstName: action.payload.firstName,
-            userLastName: action.payload.lastName,
-        };
-    }
-    if (action.type === showEditNameFields.toString()) {
-        return {
-            ...state,
-            editNameFields: true,
-        };
-    }
-    if (action.type === hideEditNameFields.toString()) {
-        return {
-            ...state,
-            editNameFields: false,
-        };
-    }
-
-    if (action.type === fetchWithoutLoggingIn.toString()) {
-        return {
-            ...state,
-            requestedPageWithoutLoggingIn: true,
-        };
-    }
-    if (action.type === redirectedNotLoggedIn.toString()) {
-        return {
-            ...state,
-            requestedPageWithoutLoggingIn: false,
-        };
-    }
-    if (action.type === setIsLoggedIn.toString()) {
-        return {
-            ...state,
-            isLoggedIn: true,
-            userFirstName: action.payload.body.firstName,
-            userLastName: action.payload.body.lastName,
-        };
-    }
-    if (action.type === setIsLoggedOut.toString()) {
-        return {
-            ...state,
-            isLoggedIn: false,
-        };
-    }
-    if (action.type === setToken.toString()) {
-        return {
-            ...state,
-            token: action.payload,
-        };
-    }
-
-    return state;
-}
+const reducer = createReducer(initialState, (builder) =>
+    builder
+        .addCase(editUserName, (draft, action: any) => {
+            draft.userFirstName = action.payload.firstName;
+            draft.userLastName = action.payload.lastName;
+            return;
+        })
+        .addCase(showEditNameFields, (draft) => {
+            draft.editNameFields = true;
+            return;
+        })
+        .addCase(hideEditNameFields, (draft) => {
+            draft.editNameFields = false;
+            return;
+        })
+        .addCase(fetchWithoutLoggingIn, (draft) => {
+            draft.requestedPageWithoutLoggingIn = true;
+            return;
+        })
+        .addCase(redirectedNotLoggedIn, (draft) => {
+            draft.requestedPageWithoutLoggingIn = false;
+            return;
+        })
+        .addCase(setIsLoggedIn, (draft, action: any) => {
+            draft.isLoggedIn = true;
+            draft.userFirstName = action.payload.body.firstName;
+            draft.userLastName = action.payload.body.lastName;
+            return;
+        })
+        .addCase(setIsLoggedOut, (draft) => {
+            draft.isLoggedIn = false;
+            return;
+        })
+        .addCase(setToken, (draft, action: any) => {
+            draft.token = action.payload;
+            return;
+        })
+);
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 // Store
