@@ -1,16 +1,17 @@
 // CSS
 import classes from './Account.module.css';
 
-function Account() {
+// Interfaces
+import { IAccount } from '../../../interfaces/accountInterfaces';
+
+function Account({ title, amount }: IAccount) {
     return (
         <section className={classes['account']}>
             <div className={classes['account-content-wrapper']}>
-                <h3 className={classes['account-title']}>
-                    Argent Bank Checking (x8349)
-                </h3>
-                <p className={classes['account-amount']}>$2,082.79</p>
+                <h3 className={classes['account-title']}>{title}</h3>
+                <p className={classes['account-amount']}>{amount.value}</p>
                 <p className={classes['account-amount-description']}>
-                    Available Balance
+                    {amount.description}
                 </p>
             </div>
             <div className={classes['account-content-wrapper cta']}>

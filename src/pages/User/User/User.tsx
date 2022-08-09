@@ -11,6 +11,12 @@ import Header from '../Header/Header';
 // CSS
 import classes from './User.module.css';
 
+// Interfaces
+import { IAccount } from '../../../interfaces/accountInterfaces';
+
+// Account content (will be later replaced with values retrieved from API)
+import { ACCOUNT_CONTENT } from '../Account/ACCOUNT_CONTENT';
+
 function User() {
     // Redux
     const dispatch = useDispatch();
@@ -23,9 +29,13 @@ function User() {
         <main className={classes['bg-dark']}>
             <Header />
             <h2 className="sr-only">Accounts</h2>
-            <Account />
-            <Account />
-            <Account />
+            {ACCOUNT_CONTENT.map((account: IAccount, index: number) => (
+                <Account
+                    key={index}
+                    title={account.title}
+                    amount={account.amount}
+                />
+            ))}
         </main>
     ) : (
         <Navigate replace to="/sign-in" />
