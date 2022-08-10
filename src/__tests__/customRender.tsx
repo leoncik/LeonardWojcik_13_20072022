@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { reducer } from '../store';
+import { HelmetProvider } from 'react-helmet-async';
 
 /**
  * A custom function
@@ -17,7 +18,9 @@ export function render(ui: React.ReactElement) {
     function Wrapper({ children }: PropsWithChildren<unknown>) {
         return (
             <MemoryRouter>
-                <Provider store={store}>{children}</Provider>
+                <Provider store={store}>
+                    <HelmetProvider>{children}</HelmetProvider>
+                </Provider>
             </MemoryRouter>
         );
     }
