@@ -1,7 +1,7 @@
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 
 // Initial state
-const initialState = {
+export const initialState = {
     userFirstName: '',
     userLastName: '',
     editNameFields: false,
@@ -12,8 +12,8 @@ const initialState = {
 
 // Action Creators
 const editUserName = createAction('editUserName');
-const hideEditNameFields = createAction('hideEditNameFields');
-const showEditNameFields = createAction('showEditNameFields');
+export const hideEditNameFields = createAction('hideEditNameFields');
+export const showEditNameFields = createAction('showEditNameFields');
 
 const setToken = createAction('setToken');
 
@@ -25,7 +25,7 @@ const setIsLoggedOut = createAction('setIsLoggedOut');
 
 // Reducer
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const reducer = createReducer(initialState, (builder) =>
+export const reducer = createReducer(initialState, (builder) =>
     builder
         .addCase(editUserName, (draft, action: any) => {
             draft.userFirstName = action.payload.firstName;
