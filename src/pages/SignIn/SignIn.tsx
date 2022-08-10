@@ -24,6 +24,9 @@ import { notificationMessages } from '../../helpers/notificationMessages';
 import classes from './SignIn.module.css';
 import ErrorFormMessage from '../../components/layout/ErrorFormMessage/ErrorFormMessage';
 
+// Libraries
+import { Helmet } from 'react-helmet-async';
+
 function SignIn() {
     // Redux
     const dispatch = useDispatch();
@@ -104,64 +107,69 @@ function SignIn() {
     };
 
     return !isLoggedIn ? (
-        <main className={classes['bg-dark']}>
-            <section className={classes['sign-in-content']}>
-                <i className="fa fa-user-circle sign-in-icon"></i>
-                <h1>Sign In</h1>
-                {isLoggingFailed ? (
-                    <ErrorFormMessage message={errorMessage} />
-                ) : null}
-                {hasBeenRedirected ? (
-                    <ErrorFormMessage
-                        message={notificationMessages.notLoggedIn}
-                    />
-                ) : null}
-                <GenericForm submitFunction={handleSubmit}>
-                    {/* USERNAME */}
-                    <GenericLabelInput
-                        cssClasses={'input-wrapper'}
-                        label={{ for: 'username', text: 'Email' }}
-                        inputType={'email'}
-                        inputId={'username'}
-                        inputRef={userNameInputRef}
-                    />
-                    {/* PASSWORD */}
-                    <GenericLabelInput
-                        cssClasses={'input-wrapper'}
-                        label={{ for: 'password', text: 'Password' }}
-                        inputType={'password'}
-                        inputId={'password'}
-                        inputRef={userPasswordInputRef}
-                    />
-                    {/* REMEMBER ME */}
-                    <GenericLabelInput
-                        cssClasses={'input-remember'}
-                        label={{ for: 'remember-me', text: 'Remember me' }}
-                        inputType={'checkbox'}
-                        inputId={'remember-me'}
-                        inputRef={userRememberInputRef}
-                    />
-                    {/* SIGN IN BUTTON */}
-                    {isPending ? (
-                        <GenericButton
-                            cssClasses={'sign-in-button'}
-                            isActive={false}
-                            action={null}
-                        >
-                            Connexion…
-                        </GenericButton>
-                    ) : (
-                        <GenericButton
-                            cssClasses={'sign-in-button'}
-                            isActive={true}
-                            action={null}
-                        >
-                            Sign In
-                        </GenericButton>
-                    )}
-                </GenericForm>
-            </section>
-        </main>
+        <>
+            <Helmet>
+                <title>Sign In</title>
+            </Helmet>
+            <main className={classes['bg-dark']}>
+                <section className={classes['sign-in-content']}>
+                    <i className="fa fa-user-circle sign-in-icon"></i>
+                    <h1>Sign In</h1>
+                    {isLoggingFailed ? (
+                        <ErrorFormMessage message={errorMessage} />
+                    ) : null}
+                    {hasBeenRedirected ? (
+                        <ErrorFormMessage
+                            message={notificationMessages.notLoggedIn}
+                        />
+                    ) : null}
+                    <GenericForm submitFunction={handleSubmit}>
+                        {/* USERNAME */}
+                        <GenericLabelInput
+                            cssClasses={'input-wrapper'}
+                            label={{ for: 'username', text: 'Email' }}
+                            inputType={'email'}
+                            inputId={'username'}
+                            inputRef={userNameInputRef}
+                        />
+                        {/* PASSWORD */}
+                        <GenericLabelInput
+                            cssClasses={'input-wrapper'}
+                            label={{ for: 'password', text: 'Password' }}
+                            inputType={'password'}
+                            inputId={'password'}
+                            inputRef={userPasswordInputRef}
+                        />
+                        {/* REMEMBER ME */}
+                        <GenericLabelInput
+                            cssClasses={'input-remember'}
+                            label={{ for: 'remember-me', text: 'Remember me' }}
+                            inputType={'checkbox'}
+                            inputId={'remember-me'}
+                            inputRef={userRememberInputRef}
+                        />
+                        {/* SIGN IN BUTTON */}
+                        {isPending ? (
+                            <GenericButton
+                                cssClasses={'sign-in-button'}
+                                isActive={false}
+                                action={null}
+                            >
+                                Connexion…
+                            </GenericButton>
+                        ) : (
+                            <GenericButton
+                                cssClasses={'sign-in-button'}
+                                isActive={true}
+                                action={null}
+                            >
+                                Sign In
+                            </GenericButton>
+                        )}
+                    </GenericForm>
+                </section>
+            </main>
+        </>
     ) : (
         <Navigate replace to="/user" />
     );

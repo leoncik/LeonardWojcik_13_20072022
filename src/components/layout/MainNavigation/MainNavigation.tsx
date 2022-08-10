@@ -13,6 +13,9 @@ import classes from './MainNavigation.module.css';
 // Assets
 import logo from '../../../assets/images/argentBankLogo.png';
 
+// Libraries
+import { Helmet } from 'react-helmet-async';
+
 function MainNavigation() {
     const dispatch = useDispatch();
 
@@ -28,36 +31,44 @@ function MainNavigation() {
     };
 
     return (
-        <nav className={classes['main-nav']}>
-            <NavLink className={classes['main-nav-logo']} to="/">
-                <img
-                    className={classes['main-nav-logo-image']}
-                    src={logo}
-                    alt="Argent Bank Logo"
+        <>
+            <Helmet>
+                <link
+                    rel="stylesheet"
+                    href="/icons/font-awesome-4.7.0/css/font-awesome.min.css"
                 />
-                <h1 className={classes['sr-only']}>Argent Bank</h1>
-            </NavLink>
-            <div>
-                <NavLink
-                    className={classes['main-nav-item']}
-                    to={isLoggedIn ? '/user' : '/sign-in'}
-                >
-                    <i className="fa fa-user-circle"></i>
-                    {isLoggedIn ? userName : 'Sign In'}
+            </Helmet>
+            <nav className={classes['main-nav']}>
+                <NavLink className={classes['main-nav-logo']} to="/">
+                    <img
+                        className={classes['main-nav-logo-image']}
+                        src={logo}
+                        alt="Argent Bank Logo"
+                    />
+                    <h1 className={classes['sr-only']}>Argent Bank</h1>
                 </NavLink>
-                {isLoggedIn ? (
+                <div>
                     <NavLink
-                        ref={logoutRef}
-                        onClick={handleLogout}
                         className={classes['main-nav-item']}
-                        to="/sign-in"
+                        to={isLoggedIn ? '/user' : '/sign-in'}
                     >
-                        <i className="fa fa-sign-out"></i>
-                        Sign Out
+                        <i className="fa fa-user-circle"></i>
+                        {isLoggedIn ? userName : 'Sign In'}
                     </NavLink>
-                ) : null}
-            </div>
-        </nav>
+                    {isLoggedIn ? (
+                        <NavLink
+                            ref={logoutRef}
+                            onClick={handleLogout}
+                            className={classes['main-nav-item']}
+                            to="/sign-in"
+                        >
+                            <i className="fa fa-sign-out"></i>
+                            Sign Out
+                        </NavLink>
+                    ) : null}
+                </div>
+            </nav>
+        </>
     );
 }
 
