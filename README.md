@@ -5,7 +5,7 @@ Project carried out as part of the Front-End Web Development Career Path of Open
 ## Table of contents
 
 -   [Description](#description)
-    -   [Scenario](#scenario)
+    -   [Scenario and missions](#scenario-and-missions)
 -   [Installation](#installation)
     -   [1 Install the backend](#1-install-the-backend)
     -   [2 Install the frontend](#2-install-the-frontend)
@@ -18,9 +18,15 @@ Project carried out as part of the Front-End Web Development Career Path of Open
 
 ## Description
 
-### Scenario
+### Scenario and missions
 
-Coming soon.
+Argent Bank is a fictional bank application. For this project, I had two missions :
+
+**1) Setup the application with the login system.**  
+The backend was already made, provided with all the needed routes and a set of issue templates to track the work I had to do. You can see these resolved issues with this link : https://github.com/leoncik/LeonardWojcik_13_20072022_API/issues?q=is%3Aissue+is%3Aclosed.
+
+**2) Make a proposal for the API for the future version of the App that will handle transactions.**  
+I wrote a document (following the Swagger convention) with the different API routes that you can find on this link (backend's repo) : https://github.com/leoncik/LeonardWojcik_13_20072022_API/blob/master/swagger-transactions.yaml
 
 ## Installation
 
