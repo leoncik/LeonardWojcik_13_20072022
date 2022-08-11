@@ -1,5 +1,10 @@
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 
+// Reducers (for refactored version)
+// import { authenticationReducer } from './features/authentication';
+// import { editNameReducer } from './features/editName';
+// import { redirectionReducer } from './features/redirections';
+
 // Initial state
 export const initialState = {
     userFirstName: '',
@@ -10,20 +15,23 @@ export const initialState = {
     token: '',
 };
 
-// Action Creators
+// ACTION CREATORS
+
+// Authentication
+const setToken = createAction('setToken');
+const fetchWithoutLoggingIn = createAction('fetchWithoutLoggingIn');
+const redirectedNotLoggedIn = createAction('redirectedNotLoggedIn');
+
+// Login
 const editUserName = createAction('editUserName');
 export const hideEditNameFields = createAction('hideEditNameFields');
 export const showEditNameFields = createAction('showEditNameFields');
 
-const setToken = createAction('setToken');
-
-const fetchWithoutLoggingIn = createAction('fetchWithoutLoggingIn');
-const redirectedNotLoggedIn = createAction('redirectedNotLoggedIn');
-
+// Redirection
 const setIsLoggedIn = createAction('setIsLoggedIn');
 const setIsLoggedOut = createAction('setIsLoggedOut');
 
-// Reducer
+// REDUCER
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const reducer = createReducer(initialState, (builder) =>
     builder
@@ -65,7 +73,16 @@ export const reducer = createReducer(initialState, (builder) =>
 );
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
-// Store
+// STORE
 export const store = configureStore({
     reducer: reducer,
 });
+
+// Store (refactored version test)
+// export const store = configureStore({
+//     reducer: {
+//         authentication: authenticationReducer,
+//         redirection: redirectionReducer,
+//         editName: editNameReducer
+//     }
+// });
