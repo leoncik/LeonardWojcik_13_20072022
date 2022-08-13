@@ -17,7 +17,7 @@ function GenericButton({
 }: GenericButtonProps) {
     return (
         <button
-            disabled={isActive ? false : true}
+            disabled={!isActive}
             className={classes[`${cssClasses}`]}
             onClick={action}
         >

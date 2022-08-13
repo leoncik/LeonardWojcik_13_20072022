@@ -1,8 +1,10 @@
 // Account interface
 export interface IAccount {
     title: string;
-    amount: {
-        value: string;
-        description: string;
-    };
+    amount: IAmount;
+}
+
+export interface IAmount {
+    value: string;
+    description: string;
 }

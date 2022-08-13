@@ -3,6 +3,7 @@ import classes from './Account.module.css';
 
 // Interfaces
 import { IAccount } from '../../../interfaces/accountInterfaces';
+import GenericButton from '../../../components/layout/GenericButton/GenericButton';
 
 function Account({ title, amount }: IAccount) {
     return (
@@ -15,9 +16,13 @@ function Account({ title, amount }: IAccount) {
                 </p>
             </div>
             <div className={classes['account-content-wrapper cta']}>
-                <button className={classes['transaction-button']}>
+                <GenericButton
+                    cssClasses={'transaction-button'}
+                    isActive={true}
+                    action={null}
+                >
                     View transactions
-                </button>
+                </GenericButton>
             </div>
         </section>
     );

@@ -1,35 +1,35 @@
 // User login info
 export interface IUserLoginInfo {
-    email: string | undefined;
-    password: string | undefined;
+    email?: string;
+    password?: string;
 }
 
 // User sign-up info
 export interface IUserSignup {
-    email: string | undefined;
-    password: string | undefined;
-    firstName: string | undefined;
-    lastName: string | undefined;
+    email?: string;
+    password?: string;
+    firstName?: string;
+    lastName?: string;
 }
 
 // User profile info
 export interface IUserProfile {
-    status: number | undefined;
-    message: string | undefined;
-    body: IUserProfileBody | undefined;
+    status?: number;
+    message?: string;
+    body?: IUserProfileBody;
 }
 
 export interface IUserProfileBody {
-    createdAt: string | undefined;
-    email: string | undefined;
-    firstName: string | undefined;
-    id: string | undefined;
-    lastName: string | undefined;
-    updatedAt: string | undefined;
+    createdAt?: string;
+    email?: string;
+    firstName?: string;
+    id?: string;
+    lastName?: string;
+    updatedAt?: string;
 }
 
 // User name
 export interface IUserName {
-    firstName: string | undefined;
-    lastName: string | undefined;
+    firstName?: string;
+    lastName?: string;
 }

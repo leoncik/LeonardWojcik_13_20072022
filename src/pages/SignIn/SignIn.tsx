@@ -149,23 +149,13 @@ function SignIn() {
                             inputRef={userRememberInputRef}
                         />
                         {/* SIGN IN BUTTON */}
-                        {isPending ? (
-                            <GenericButton
-                                cssClasses={'sign-in-button'}
-                                isActive={false}
-                                action={null}
-                            >
-                                Connexion…
-                            </GenericButton>
-                        ) : (
-                            <GenericButton
-                                cssClasses={'sign-in-button'}
-                                isActive={true}
-                                action={null}
-                            >
-                                Sign In
-                            </GenericButton>
-                        )}
+                        <GenericButton
+                            cssClasses={'sign-in-button'}
+                            isActive={!isPending}
+                            action={null}
+                        >
+                            {isPending ? 'Connexion…' : 'Sign In'}
+                        </GenericButton>
                     </GenericForm>
                 </section>
             </main>

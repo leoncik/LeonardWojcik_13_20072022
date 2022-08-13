@@ -9,6 +9,7 @@ import UpdateProfile from '../UpdateProfile/UpdateProfile';
 
 // CSS
 import classes from './Header.module.css';
+import GenericButton from '../../../components/layout/GenericButton/GenericButton';
 
 function Header() {
     /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -23,6 +24,10 @@ function Header() {
         isEditProfile && dispatch({ type: 'hideEditNameFields' });
     }, []);
 
+    const handleNameFields = () => {
+        dispatch({ type: 'showEditNameFields' });
+    };
+
     return (
         <div className={classes['header']}>
             <h1>
@@ -32,14 +37,13 @@ function Header() {
             </h1>
             <UpdateProfile />
             {!isEditProfile ? (
-                <button
-                    onClick={() => {
-                        dispatch({ type: 'showEditNameFields' });
-                    }}
-                    className={classes['edit-button']}
+                <GenericButton
+                    cssClasses={'edit-button'}
+                    isActive={true}
+                    action={handleNameFields}
                 >
                     Edit Name
-                </button>
+                </GenericButton>
             ) : null}
         </div>
     );
