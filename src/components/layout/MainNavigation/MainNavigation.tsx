@@ -1,5 +1,6 @@
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
+import { authenticationActions } from '../../../features/slices/authenticationSlice';
 
 // React Hooks
 import { useRef } from 'react';
@@ -20,14 +21,18 @@ function MainNavigation() {
     const dispatch = useDispatch();
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    const isLoggedIn = useSelector((state: any) => state.isLoggedIn);
-    const userName = useSelector((state: any) => state.userFirstName);
+    const isLoggedIn = useSelector(
+        (state: any) => state.authentication.isLoggedIn
+    );
+    const userName = useSelector(
+        (state: any) => state.authentication.userFirstName
+    );
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
     const logoutRef = useRef<HTMLAnchorElement>(null);
 
     const handleLogout = () => {
-        dispatch({ type: 'setIsLoggedOut' });
+        dispatch(authenticationActions.setIsLoggedOut());
     };
 
     return (

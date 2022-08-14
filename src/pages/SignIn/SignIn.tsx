@@ -1,5 +1,7 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
+import { authenticationActions } from '../../features/slices/authenticationSlice';
+import { redirectionActions } from '../../features/slices/redirectionsSlice';
 
 // React Hooks
 import { useRef, useState } from 'react';
@@ -32,7 +34,7 @@ function SignIn() {
     const dispatch = useDispatch();
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const hasBeenRedirected = useSelector(
-        (state: any) => state.requestedPageWithoutLoggingIn
+        (state: any) => state.redirection.requestedPageWithoutLoggingIn
     );
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -51,7 +53,8 @@ function SignIn() {
         e.preventDefault();
 
         // Clear previous error message if user has been redirected
-        hasBeenRedirected && dispatch({ type: 'redirectedNotLoggedIn' });
+        hasBeenRedirected &&
+            dispatch(redirectionActions.redirectedNotLoggedIn());
 
         const enteredName = userNameInputRef?.current?.value;
         const enteredPassword = userPasswordInputRef?.current?.value;
@@ -85,21 +88,15 @@ function SignIn() {
         }
 
         const token = requestResponse?.body?.token;
-        dispatch({
-            type: 'setToken',
-            payload: token,
-        });
+        dispatch(authenticationActions.setToken(token));
 
         const userProfile = await authenticationRequest(
             endpoint.userProfileEndpoint,
             token
         );
-        console.log(userProfile);
+        console.log(userProfile, 'eee');
         if (userProfile.status === 200) {
-            dispatch({
-                type: 'setIsLoggedIn',
-                payload: userProfile,
-            });
+            dispatch(authenticationActions.setIsLoggedIn(userProfile));
             setIsLoggedIn(true);
         }
 

@@ -1,12 +1,14 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import GenericButton from '../../../components/layout/GenericButton/GenericButton';
+import { authenticationActions } from '../../../features/slices/authenticationSlice';
+import { editNameActions } from '../../../features/slices/editNameSlice';
 
 // React Hooks
 import { useRef, useState } from 'react';
 
 // Page components
 import GenericForm from '../../../components/layout/GenericForm/GenericForm';
+import GenericButton from '../../../components/layout/GenericButton/GenericButton';
 
 // Helpers
 import * as endpoint from '../../../helpers/apiEndpoints';
@@ -30,10 +32,16 @@ function UpdateProfile() {
     const [isEditNameFailed, setIsEditNameFailed] = useState(false);
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    const isEditProfile = useSelector((state: any) => state.editNameFields);
-    const token = useSelector((state: any) => state.token);
-    const firstName = useSelector((state: any) => state.userFirstName);
-    const lastName = useSelector((state: any) => state.userLastName);
+    const isEditProfile = useSelector(
+        (state: any) => state.editName.editNameFields
+    );
+    const token = useSelector((state: any) => state.authentication.token);
+    const firstName = useSelector(
+        (state: any) => state.authentication.userFirstName
+    );
+    const lastName = useSelector(
+        (state: any) => state.authentication.userLastName
+    );
     /* eslint-enable @typescript-eslint/no-explicit-any */
     console.log(isEditProfile);
 
@@ -44,7 +52,7 @@ function UpdateProfile() {
         // Clear error message if any
         firstNameError && setFirstNameError(false);
         lastNameError && setLastNameError(false);
-        dispatch({ type: 'hideEditNameFields' });
+        dispatch(editNameActions.hideEditNameFields());
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -86,12 +94,9 @@ function UpdateProfile() {
             setIsEditNameFailed(true);
         }
         if (requestResponse.status === 200) {
-            dispatch({
-                type: 'editUserName',
-                payload: userNewName,
-            });
+            dispatch(authenticationActions.editUserName(userNewName));
         }
-        dispatch({ type: 'hideEditNameFields' });
+        dispatch(editNameActions.hideEditNameFields());
         console.log(requestResponse);
     };
 

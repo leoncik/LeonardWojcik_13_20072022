@@ -1,5 +1,6 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
+import { redirectionActions } from '../../features/slices/redirectionsSlice';
 
 // Page components
 import FeatureItem from '../../components/FeatureItem/FeatureItem';
@@ -19,10 +20,10 @@ function Home() {
     const dispatch = useDispatch();
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const hasBeenRedirected = useSelector(
-        (state: any) => state.requestedPageWithoutLoggingIn
+        (state: any) => state.redirection.requestedPageWithoutLoggingIn
     );
     /* eslint-enable @typescript-eslint/no-explicit-any */
-    hasBeenRedirected && dispatch({ type: 'redirectedNotLoggedIn' });
+    hasBeenRedirected && dispatch(redirectionActions.redirectedNotLoggedIn());
 
     return (
         <>
