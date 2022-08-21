@@ -10,6 +10,7 @@ type GenericLabelInputProps = {
     inputType: string;
     inputId: string;
     inputRef: any;
+    isRequired: boolean;
 };
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -19,11 +20,17 @@ function GenericLabelInput({
     inputType,
     inputId,
     inputRef,
+    isRequired,
 }: GenericLabelInputProps) {
     return (
         <div className={classes[`${cssClasses}`]}>
             <label htmlFor={label.for}>{label.text}</label>
-            <input type={inputType} id={inputId} ref={inputRef} />
+            <input
+                type={inputType}
+                id={inputId}
+                ref={inputRef}
+                required={isRequired}
+            />
         </div>
     );
 }

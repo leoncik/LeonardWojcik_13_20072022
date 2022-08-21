@@ -19,8 +19,6 @@ import { notificationMessages } from '../../../helpers/notificationMessages';
 import classes from './UpdateProfile.module.css';
 import ErrorFormMessage from '../../../components/layout/ErrorFormMessage/ErrorFormMessage';
 
-// Todo : add form validation.
-
 function UpdateProfile() {
     // References
     const userFirstNameInputRef = useRef<HTMLInputElement>(null);
@@ -65,16 +63,19 @@ function UpdateProfile() {
         lastNameError && setLastNameError(false);
 
         // Check if any field is empty and display an error message
-        if (enteredFirstName === '' && enteredLastName === '') {
+        if (
+            enteredFirstName?.trim().length === 0 &&
+            enteredLastName?.trim().length === 0
+        ) {
             setFirstNameError(true);
             setLastNameError(true);
             return;
         }
-        if (enteredFirstName === '') {
+        if (enteredFirstName?.trim().length === 0) {
             setFirstNameError(true);
             return;
         }
-        if (enteredLastName === '') {
+        if (enteredLastName?.trim().length === 0) {
             setLastNameError(true);
             return;
         }

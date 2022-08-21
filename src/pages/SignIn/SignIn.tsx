@@ -21,6 +21,7 @@ import {
     authenticationRequest,
 } from '../../helpers/fetchHandlers';
 import { notificationMessages } from '../../helpers/notificationMessages';
+import { mailRegex } from '../../helpers/formValidation';
 
 // CSS
 import classes from './SignIn.module.css';
@@ -49,6 +50,7 @@ function SignIn() {
     const userPasswordInputRef = useRef<HTMLInputElement>(null);
     const userRememberInputRef = useRef<HTMLInputElement>(null);
 
+    // Submit function
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -60,6 +62,17 @@ function SignIn() {
         const enteredPassword = userPasswordInputRef?.current?.value;
         // const enteredRemember = userRememberInputRef.current.checked;
 
+        // Check form fields
+        if (!enteredName?.match(mailRegex)) {
+            setErrorMessage('The format of the email address is invalid.');
+            return;
+        }
+        if (enteredPassword?.trim().length === 0) {
+            setErrorMessage('Please enter your password.');
+            return;
+        }
+
+        // Save form fields and proceed to POST request
         const userLoginInfo = {
             email: enteredName,
             password: enteredPassword,
@@ -128,6 +141,7 @@ function SignIn() {
                             inputType={'email'}
                             inputId={'username'}
                             inputRef={userNameInputRef}
+                            isRequired={true}
                         />
                         {/* PASSWORD */}
                         <GenericLabelInput
@@ -136,6 +150,7 @@ function SignIn() {
                             inputType={'password'}
                             inputId={'password'}
                             inputRef={userPasswordInputRef}
+                            isRequired={true}
                         />
                         {/* REMEMBER ME */}
                         <GenericLabelInput
@@ -144,6 +159,7 @@ function SignIn() {
                             inputType={'checkbox'}
                             inputId={'remember-me'}
                             inputRef={userRememberInputRef}
+                            isRequired={false}
                         />
                         {/* SIGN IN BUTTON */}
                         <GenericButton
