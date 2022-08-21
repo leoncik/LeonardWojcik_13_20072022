@@ -35,6 +35,9 @@
     border-radius: 3px;
     cursor: pointer;
 }
+.edit-profile-button:active {
+    transform: scale(0.95);
+}
 
 .transaction-button {
     display: block;

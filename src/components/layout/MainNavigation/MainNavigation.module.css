@@ -10,8 +10,8 @@
     color: #2c3e50;
 }
 
-.main-nav a.router-link-exact-active {
-    color: #42b983;
+.main-nav a:active {
+    opacity: 0.8;
 }
 
 .main-nav-item {

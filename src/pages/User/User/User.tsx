@@ -9,9 +9,6 @@ import { Navigate } from 'react-router-dom';
 import Account from '../Account/Account';
 import Header from '../Header/Header';
 
-// CSS
-import classes from './User.module.css';
-
 // Interfaces
 import { IAccount } from '../../../interfaces/accountInterfaces';
 
@@ -36,7 +33,7 @@ function User() {
             <Helmet>
                 <title>Your accounts</title>
             </Helmet>
-            <main className={classes['bg-dark']}>
+            <main className="bg-dark">
                 <Header />
                 <h2 className="sr-only">Accounts</h2>
                 {ACCOUNT_CONTENT.map((account: IAccount, index: number) => (
