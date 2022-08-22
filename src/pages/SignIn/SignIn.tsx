@@ -79,15 +79,15 @@ function SignIn() {
             // remember: enteredRemember,
         };
 
-        console.log(userLoginInfo);
-
         setIsPending(true);
 
-        const requestResponse = await genericPostRequest(
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        const requestResponse: any = await genericPostRequest(
             endpoint.userLoginEndpoint,
             userLoginInfo
         );
-        if (requestResponse.status === 400) {
+        /* eslint-enable @typescript-eslint/no-explicit-any */
+        if (requestResponse.isSuccess === false) {
             setErrorMessage(notificationMessages.failedSignIn);
             setIsLoggingFailed(true);
             setIsPending(false);
@@ -100,16 +100,15 @@ function SignIn() {
             setIsPending(false);
         }
 
-        const token = requestResponse?.body?.token;
+        const token = requestResponse?.data?.body?.token;
         dispatch(authenticationActions.setToken(token));
 
         const userProfile = await authenticationRequest(
             endpoint.userProfileEndpoint,
             token
         );
-        console.log(userProfile, 'eee');
-        if (userProfile.status === 200) {
-            dispatch(authenticationActions.setIsLoggedIn(userProfile));
+        if (userProfile.isSuccess) {
+            dispatch(authenticationActions.setIsLoggedIn(userProfile.data));
             setIsLoggedIn(true);
         }
 

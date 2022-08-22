@@ -41,8 +41,6 @@ function UpdateProfile() {
         (state: any) => state.authentication.userLastName
     );
     /* eslint-enable @typescript-eslint/no-explicit-any */
-    console.log(isEditProfile);
-
     const dispatch = useDispatch();
 
     const handleCancel = (e: React.MouseEvent) => {
@@ -50,6 +48,7 @@ function UpdateProfile() {
         // Clear error message if any
         firstNameError && setFirstNameError(false);
         lastNameError && setLastNameError(false);
+        isEditNameFailed && setIsEditNameFailed(false);
         dispatch(editNameActions.hideEditNameFields());
     };
 
@@ -85,73 +84,79 @@ function UpdateProfile() {
             lastName: enteredLastName,
         };
 
-        const requestResponse = await genericPutRequest(
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        const requestResponse: any = await genericPutRequest(
             endpoint.userProfileEndpoint,
             userNewName,
             token
         );
+        /* eslint-enable @typescript-eslint/no-explicit-any */
 
-        if (requestResponse.status !== 200) {
+        if (requestResponse === false) {
             setIsEditNameFailed(true);
         }
-        if (requestResponse.status === 200) {
+        if (requestResponse?.isSuccess) {
             dispatch(authenticationActions.editUserName(userNewName));
         }
         dispatch(editNameActions.hideEditNameFields());
-        console.log(requestResponse);
     };
 
-    return isEditProfile ? (
-        <GenericForm submitFunction={handleSubmit}>
-            {isEditNameFailed && (
-                <ErrorFormMessage
-                    message={notificationMessages.failedUpdateProfile500}
-                />
-            )}
-            <div className={classes['input-fields']}>
-                <div className="first-name-field">
-                    <input
-                        type="text"
-                        placeholder={firstName}
-                        ref={userFirstNameInputRef}
-                    />
-                    {firstNameError ? (
-                        <p className={classes['first-name-input-error']}>
-                            Enter your first name
-                        </p>
-                    ) : null}
+    if (isEditProfile)
+        return (
+            <GenericForm submitFunction={handleSubmit}>
+                <div className={classes['input-fields']}>
+                    <div className="first-name-field">
+                        <input
+                            type="text"
+                            placeholder={firstName}
+                            ref={userFirstNameInputRef}
+                        />
+                        {firstNameError ? (
+                            <p className={classes['first-name-input-error']}>
+                                Enter your first name
+                            </p>
+                        ) : null}
+                    </div>
+                    <div className="last-name-field">
+                        <input
+                            type="text"
+                            placeholder={lastName}
+                            ref={userLastNameInputRef}
+                        />
+                        {lastNameError ? (
+                            <p className={classes['last-name-input-error']}>
+                                Enter your last name
+                            </p>
+                        ) : null}
+                    </div>
                 </div>
-                <div className="last-name-field">
-                    <input
-                        type="text"
-                        placeholder={lastName}
-                        ref={userLastNameInputRef}
-                    />
-                    {lastNameError ? (
-                        <p className={classes['last-name-input-error']}>
-                            Enter your last name
-                        </p>
-                    ) : null}
+                <div className={classes['buttons']}>
+                    <GenericButton
+                        cssClasses={'edit-profile-button'}
+                        isActive={true}
+                        action={null}
+                    >
+                        Save
+                    </GenericButton>
+                    <GenericButton
+                        cssClasses={'edit-profile-button'}
+                        isActive={true}
+                        action={handleCancel}
+                    >
+                        Cancel
+                    </GenericButton>
                 </div>
-            </div>
-            <div className={classes['buttons']}>
-                <GenericButton
-                    cssClasses={'edit-profile-button'}
-                    isActive={true}
-                    action={null}
-                >
-                    Save
-                </GenericButton>
-                <GenericButton
-                    cssClasses={'edit-profile-button'}
-                    isActive={true}
-                    action={handleCancel}
-                >
-                    Cancel
-                </GenericButton>
-            </div>
-        </GenericForm>
-    ) : null;
+            </GenericForm>
+        );
+
+    if (isEditNameFailed)
+        return (
+            <ErrorFormMessage
+                message={notificationMessages.failedUpdateProfile500}
+            />
+        );
+
+    return null;
 }
 
 export default UpdateProfile;

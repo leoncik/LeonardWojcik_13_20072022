@@ -6,6 +6,16 @@ import { IUserName } from '../interfaces/apiInterfaces';
 import { notificationMessages } from './notificationMessages';
 
 /**
+ * Checks if the status of a fetch is ok
+ * @param {IFetchObject} data - Fetched data.
+ * @returns {boolean}
+ */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export const isStatusOk = (data: any) =>
+    data.data.status < 300 && data.data.status >= 200 ? true : false;
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
+/**
  * Fetches data from url.
  * @param {string} apiEndpoint - Fetched url
  * @param {string} requestBody  - body send with POST method
@@ -22,7 +32,12 @@ export const genericPostRequest = async (
             body: JSON.stringify(requestBody),
         });
         const data = await response.json();
-        return data;
+        const isSuccess = false;
+        const responseObject = { data, isSuccess };
+        if (isStatusOk(responseObject)) {
+            responseObject.isSuccess = true;
+        }
+        return responseObject;
     } catch (error) {
         const errorMessage = notificationMessages.failedSignIn;
         return errorMessage;
@@ -47,7 +62,12 @@ export const authenticationRequest = async (
         },
     });
     const data = await response.json();
-    return data;
+    const isSuccess = false;
+    const responseObject = { data, isSuccess };
+    if (isStatusOk(responseObject)) {
+        responseObject.isSuccess = true;
+    }
+    return responseObject;
 };
 
 /**
@@ -71,8 +91,14 @@ export const genericPutRequest = async (
             body: JSON.stringify(requestBody),
         });
         const data = await response.json();
-        return data;
+        const isSuccess = false;
+        const responseObject = { data, isSuccess };
+        if (isStatusOk(responseObject)) {
+            responseObject.isSuccess = true;
+        }
+        return responseObject;
     } catch (error) {
         console.log(error);
+        return false;
     }
 };
