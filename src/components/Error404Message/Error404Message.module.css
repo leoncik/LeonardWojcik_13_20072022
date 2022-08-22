@@ -1,0 +1,12 @@
+.code-message {
+    font-size: 4rem;
+    margin-bottom: 0;
+}
+.explanation-message {
+    margin-top: 10px;
+    font-size: 2rem;
+}
+.redirection-message {
+    font-size: 1.2rem;
+    color: white;
+}
