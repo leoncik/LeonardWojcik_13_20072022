@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 // Redux
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import authenticationSlice from '../features/slices/authenticationSlice';
+import userSlice from '../features/slices/userSlice';
 import editNameSlice from '../features/slices/editNameSlice';
 import redirectionSlice from '../features/slices/redirectionsSlice';
 
@@ -19,7 +19,7 @@ import { HelmetProvider } from 'react-helmet-async';
 export function render(ui: React.ReactElement) {
     const store = configureStore({
         reducer: {
-            authentication: authenticationSlice.reducer,
+            authentication: userSlice.reducer,
             redirection: redirectionSlice.reducer,
             editName: editNameSlice.reducer,
         },

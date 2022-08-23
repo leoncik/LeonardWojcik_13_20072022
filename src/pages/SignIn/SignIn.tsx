@@ -1,6 +1,6 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { authenticationActions } from '../../features/slices/authenticationSlice';
+import { authenticationActions } from '../../features/slices/userSlice';
 import { redirectionActions } from '../../features/slices/redirectionsSlice';
 
 // React Hooks

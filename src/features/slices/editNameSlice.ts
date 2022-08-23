@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
-    // userFirstName: '',
-    // userLastName: '',
     editNameFields: false,
 };
 
@@ -17,11 +15,6 @@ const editNameSlice = createSlice({
         hideEditNameFields: (draft: any) => {
             draft.editNameFields = false;
         },
-        // ! Moved to authenticationSlice to get firstName and lastName states
-        // editUserName: (draft: any, action: any) => {
-        //     draft.userFirstName = action.payload.firstName;
-        //     draft.userLastName = action.payload.lastName;
-        // },
     },
 });
 /* eslint-enable @typescript-eslint/no-explicit-any */
