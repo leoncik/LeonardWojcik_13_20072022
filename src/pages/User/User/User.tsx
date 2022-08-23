@@ -1,6 +1,7 @@
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { redirectionActions } from '../../../features/slices/redirectionsSlice';
+import { IRootState } from '../../../store';
 
 // Routing
 import { Navigate } from 'react-router-dom';
@@ -21,11 +22,9 @@ import { ACCOUNT_CONTENT } from '../Account/ACCOUNT_CONTENT';
 function User() {
     // Redux
     const dispatch = useDispatch();
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     const isLoggedIn = useSelector(
-        (state: any) => state.authentication.isLoggedIn
+        (state: IRootState) => state.authentication.isLoggedIn
     );
-    /* eslint-enable @typescript-eslint/no-explicit-any */
     !isLoggedIn && dispatch(redirectionActions.fetchWithoutLoggingIn());
 
     return isLoggedIn ? (

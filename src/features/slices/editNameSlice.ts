@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface IEditNameState {
+    editNameFields: boolean;
+}
+
 export const initialState = {
     editNameFields: false,
 };

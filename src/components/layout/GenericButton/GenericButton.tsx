@@ -1,13 +1,12 @@
+import React from 'react';
 import classes from './GenericButton.module.css';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type GenericButtonProps = {
     children: React.ReactNode;
     cssClasses: string;
     isActive: boolean;
-    action: any;
+    action?: (e: React.MouseEvent<HTMLElement>) => void;
 };
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 function GenericButton({
     children,

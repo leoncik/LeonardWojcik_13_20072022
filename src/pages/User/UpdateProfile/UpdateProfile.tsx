@@ -19,6 +19,9 @@ import { notificationMessages } from '../../../helpers/notificationMessages';
 import classes from './UpdateProfile.module.css';
 import ErrorFormMessage from '../../../components/layout/ErrorFormMessage/ErrorFormMessage';
 
+// Interfaces
+import { IRootState } from '../../../store';
+
 function UpdateProfile() {
     // References
     const userFirstNameInputRef = useRef<HTMLInputElement>(null);
@@ -29,18 +32,18 @@ function UpdateProfile() {
     const [lastNameError, setLastNameError] = useState(false);
     const [isEditNameFailed, setIsEditNameFailed] = useState(false);
 
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     const isEditProfile = useSelector(
-        (state: any) => state.editName.editNameFields
+        (state: IRootState) => state.editName.editNameFields
     );
-    const token = useSelector((state: any) => state.authentication.token);
+    const token = useSelector(
+        (state: IRootState) => state.authentication.token
+    );
     const firstName = useSelector(
-        (state: any) => state.authentication.userFirstName
+        (state: IRootState) => state.authentication.userFirstName
     );
     const lastName = useSelector(
-        (state: any) => state.authentication.userLastName
+        (state: IRootState) => state.authentication.userLastName
     );
-    /* eslint-enable @typescript-eslint/no-explicit-any */
     const dispatch = useDispatch();
 
     const handleCancel = (e: React.MouseEvent) => {
@@ -134,7 +137,6 @@ function UpdateProfile() {
                     <GenericButton
                         cssClasses={'edit-profile-button'}
                         isActive={true}
-                        action={null}
                     >
                         Save
                     </GenericButton>

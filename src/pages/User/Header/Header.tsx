@@ -12,19 +12,20 @@ import UpdateProfile from '../UpdateProfile/UpdateProfile';
 import classes from './Header.module.css';
 import GenericButton from '../../../components/layout/GenericButton/GenericButton';
 
+// Interfaces
+import { IRootState } from '../../../store';
+
 function Header() {
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     const dispatch = useDispatch();
     const firstName = useSelector(
-        (state: any) => state.authentication.userFirstName
+        (state: IRootState) => state.authentication.userFirstName
     );
     const lastName = useSelector(
-        (state: any) => state.authentication.userLastName
+        (state: IRootState) => state.authentication.userLastName
     );
     const isEditProfile = useSelector(
-        (state: any) => state.editName.editNameFields
+        (state: IRootState) => state.editName.editNameFields
     );
-    /* eslint-enable @typescript-eslint/no-explicit-any */
 
     // Close UpdateProfile component when landing on page if It was previously open
     useEffect(() => {

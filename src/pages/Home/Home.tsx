@@ -15,14 +15,15 @@ import classes from './Home.module.css';
 // Libraries
 import { Helmet } from 'react-helmet-async';
 
+// Interfaces
+import { IRootState } from '../../store';
+
 function Home() {
     // Reset "requestedPageWithoutLoggingIn" state if user tried to access a page without logging in.
     const dispatch = useDispatch();
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     const hasBeenRedirected = useSelector(
-        (state: any) => state.redirection.requestedPageWithoutLoggingIn
+        (state: IRootState) => state.redirection.requestedPageWithoutLoggingIn
     );
-    /* eslint-enable @typescript-eslint/no-explicit-any */
     hasBeenRedirected && dispatch(redirectionActions.redirectedNotLoggedIn());
 
     return (

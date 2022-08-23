@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface IRedirectionState {
+    requestedPageWithoutLoggingIn: boolean;
+}
+
 const initialState = {
     requestedPageWithoutLoggingIn: false,
 };

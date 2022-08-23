@@ -30,14 +30,15 @@ import ErrorFormMessage from '../../components/layout/ErrorFormMessage/ErrorForm
 // Libraries
 import { Helmet } from 'react-helmet-async';
 
+// Interfaces
+import { IRootState } from '../../store';
+
 function SignIn() {
     // Redux
     const dispatch = useDispatch();
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     const hasBeenRedirected = useSelector(
-        (state: any) => state.redirection.requestedPageWithoutLoggingIn
+        (state: IRootState) => state.redirection.requestedPageWithoutLoggingIn
     );
-    /* eslint-enable @typescript-eslint/no-explicit-any */
 
     // States
     const [isPending, setIsPending] = useState(false);
@@ -164,7 +165,6 @@ function SignIn() {
                         <GenericButton
                             cssClasses={'sign-in-button'}
                             isActive={!isPending}
-                            action={null}
                         >
                             {isPending ? 'Connexion…' : 'Sign In'}
                         </GenericButton>

@@ -19,7 +19,6 @@ function Account({ title, amount }: IAccount) {
                 <GenericButton
                     cssClasses={'transaction-button'}
                     isActive={true}
-                    action={null}
                 >
                     View transactions
                 </GenericButton>

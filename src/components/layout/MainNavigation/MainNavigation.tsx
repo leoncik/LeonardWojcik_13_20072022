@@ -16,18 +16,17 @@ import logo from '../../../assets/images/argentBankLogo.png';
 
 // Libraries
 import { Helmet } from 'react-helmet-async';
+import { IRootState } from '../../../store';
 
 function MainNavigation() {
     const dispatch = useDispatch();
 
-    /* eslint-disable @typescript-eslint/no-explicit-any */
     const isLoggedIn = useSelector(
-        (state: any) => state.authentication.isLoggedIn
+        (state: IRootState) => state.authentication.isLoggedIn
     );
     const userName = useSelector(
-        (state: any) => state.authentication.userFirstName
+        (state: IRootState) => state.authentication.userFirstName
     );
-    /* eslint-enable @typescript-eslint/no-explicit-any */
 
     const logoutRef = useRef<HTMLAnchorElement>(null);
 
