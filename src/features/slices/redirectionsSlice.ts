@@ -8,20 +8,18 @@ const initialState = {
     requestedPageWithoutLoggingIn: false,
 };
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const redirectionSlice = createSlice({
     name: 'redirection',
     initialState: initialState,
     reducers: {
-        fetchWithoutLoggingIn: (draft: any) => {
+        fetchWithoutLoggingIn: (draft: IRedirectionState) => {
             draft.requestedPageWithoutLoggingIn = true;
         },
-        redirectedNotLoggedIn: (draft: any) => {
+        redirectedNotLoggedIn: (draft: IRedirectionState) => {
             draft.requestedPageWithoutLoggingIn = false;
         },
     },
 });
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export default redirectionSlice;
 
