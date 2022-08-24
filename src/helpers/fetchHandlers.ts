@@ -1,5 +1,5 @@
 // Interfaces
-import { IUserLoginInfo } from '../interfaces/apiInterfaces';
+import { IUserLoginInfo, IUserProfile } from '../interfaces/apiInterfaces';
 import { IUserName } from '../interfaces/apiInterfaces';
 
 // Helpers
@@ -7,18 +7,16 @@ import { notificationMessages } from './notificationMessages';
 
 /**
  * Checks if the status of a fetch is ok
- * @param {IFetchObject} data - Fetched data.
+ * @param {IUserProfile} data - Fetched data.
  * @returns {boolean}
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export const isStatusOk = (data: any): boolean =>
-    data.status < 300 && data.status >= 200 ? true : false;
-/* eslint-enable @typescript-eslint/no-explicit-any */
+export const isStatusOk = (data: IUserProfile): boolean =>
+    data.status! < 300 && data.status! >= 200 ? true : false;
 
 /**
  * Fetches data from url.
  * @param {string} apiEndpoint - Fetched url
- * @param {string} requestBody  - body send with POST method
+ * @param {IUserLoginInfo} requestBody  - body send with POST method
  * @returns {}
  */
 export const genericPostRequest = async (
@@ -41,8 +39,8 @@ export const genericPostRequest = async (
 
 /**
  * Send a POST request to authenticate user.
- * @param apiEndpoint - Fetched URL
- * @param token - user's token
+ * @param {string} apiEndpoint - Fetched URL
+ * @param {string} token - user's token
  * @returns
  */
 export const authenticationRequest = async (
@@ -63,7 +61,8 @@ export const authenticationRequest = async (
 /**
  * Send a PUT request.
  * @param {string} apiEndpoint - Fetched url
- * @param {string} requestBody  - body send with PUT method
+ * @param {IUserName} requestBody  - body send with PUT method
+ * @param {string} token - user's token
  * @returns {}
  */
 export const genericPutRequest = async (
