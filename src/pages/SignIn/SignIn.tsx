@@ -131,7 +131,7 @@ function SignIn() {
             <Helmet>
                 <title>Sign In</title>
             </Helmet>
-            <main className="bg-dark">
+            <main className="bg-dark main">
                 <section className={classes['sign-in-content']}>
                     <i className="fa fa-user-circle sign-in-icon"></i>
                     <h1>Sign In</h1>

@@ -34,7 +34,7 @@
 
 .main-nav-logo-image {
     max-width: 100%;
-    width: 200px;
+    width: 100px;
 }
 
 .sr-only {
@@ -49,4 +49,11 @@
     position: absolute !important;
     width: 1px !important;
     white-space: nowrap !important; /* 3 */
+}
+
+@media (min-width: 920px) {
+    .main-nav-logo-image {
+        max-width: 100%;
+        width: 200px;
+    }
 }

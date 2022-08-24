@@ -20,10 +20,15 @@
 
 .input-fields input {
     height: 35px;
-    width: 200px;
+    width: 15vw;
     box-shadow: 0 0 0.15em 0.15em rgb(184, 196, 207);
     border: none;
     border-radius: 3px;
+}
+@media (max-width: 920px) {
+    .input-fields input {
+        width: 33vw;
+    }
 }
 
 .first-name-input-error,

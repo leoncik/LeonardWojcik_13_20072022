@@ -83,8 +83,8 @@ function UpdateProfile() {
         }
 
         const userNewName = {
-            firstName: enteredFirstName,
-            lastName: enteredLastName,
+            firstName: enteredFirstName!,
+            lastName: enteredLastName!,
         };
 
         /* eslint-disable @typescript-eslint/no-explicit-any */
