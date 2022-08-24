@@ -11,8 +11,8 @@ import { notificationMessages } from './notificationMessages';
  * @returns {boolean}
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const isStatusOk = (data: any) =>
-    data.data.status < 300 && data.data.status >= 200 ? true : false;
+export const isStatusOk = (data: any): boolean =>
+    data.status < 300 && data.status >= 200 ? true : false;
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 /**
@@ -32,12 +32,7 @@ export const genericPostRequest = async (
             body: JSON.stringify(requestBody),
         });
         const data = await response.json();
-        const isSuccess = false;
-        const responseObject = { data, isSuccess };
-        if (isStatusOk(responseObject)) {
-            responseObject.isSuccess = true;
-        }
-        return responseObject;
+        return { data, isSuccess: isStatusOk(data) };
     } catch (error) {
         const errorMessage = notificationMessages.failedSignIn;
         return errorMessage;
@@ -62,12 +57,7 @@ export const authenticationRequest = async (
         },
     });
     const data = await response.json();
-    const isSuccess = false;
-    const responseObject = { data, isSuccess };
-    if (isStatusOk(responseObject)) {
-        responseObject.isSuccess = true;
-    }
-    return responseObject;
+    return { data, isSuccess: isStatusOk(data) };
 };
 
 /**
@@ -91,14 +81,8 @@ export const genericPutRequest = async (
             body: JSON.stringify(requestBody),
         });
         const data = await response.json();
-        const isSuccess = false;
-        const responseObject = { data, isSuccess };
-        if (isStatusOk(responseObject)) {
-            responseObject.isSuccess = true;
-        }
-        return responseObject;
+        return { data, isSuccess: isStatusOk(data) };
     } catch (error) {
-        console.log(error);
         return false;
     }
 };
