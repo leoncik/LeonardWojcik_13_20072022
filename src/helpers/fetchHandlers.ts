@@ -2,9 +2,6 @@
 import { IUserLoginInfo, IUserProfile } from '../interfaces/apiInterfaces';
 import { IUserName } from '../interfaces/apiInterfaces';
 
-// Helpers
-import { notificationMessages } from './notificationMessages';
-
 /**
  * Checks if the status of a fetch is ok
  * @param {IUserProfile} data - Fetched data.
@@ -31,9 +28,8 @@ export const genericPostRequest = async (
         });
         const data = await response.json();
         return { data, isSuccess: isStatusOk(data) };
-    } catch (error) {
-        const errorMessage = notificationMessages.failedSignIn;
-        return errorMessage;
+    } catch {
+        return false;
     }
 };
 
@@ -47,15 +43,19 @@ export const authenticationRequest = async (
     apiEndpoint: string,
     token: string
 ) => {
-    const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-    });
-    const data = await response.json();
-    return { data, isSuccess: isStatusOk(data) };
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        const data = await response.json();
+        return { data, isSuccess: isStatusOk(data) };
+    } catch {
+        return false;
+    }
 };
 
 /**
@@ -81,7 +81,7 @@ export const genericPutRequest = async (
         });
         const data = await response.json();
         return { data, isSuccess: isStatusOk(data) };
-    } catch (error) {
+    } catch {
         return false;
     }
 };

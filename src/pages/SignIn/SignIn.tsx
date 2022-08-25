@@ -102,25 +102,26 @@ function SignIn() {
             setErrorMessage(notificationMessages.failedSignIn);
             setIsLoggingFailed(true);
             setIsPending(false);
-        }
-        if (requestResponse === notificationMessages.failedSignIn) {
-            setErrorMessage(
-                'Could not find user. Please make sure that you have an account or try again later.'
-            );
-            setIsLoggingFailed(true);
-            setIsPending(false);
+            return;
         }
 
         const token = requestResponse?.data?.body?.token;
         dispatch(authenticationActions.setToken(token));
 
-        const userProfile = await authenticationRequest(
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        const userProfile: any = await authenticationRequest(
             endpoint.userProfileEndpoint,
             token
         );
+        /* eslint-enable @typescript-eslint/no-explicit-any */
         if (userProfile.isSuccess) {
             dispatch(authenticationActions.setIsLoggedIn(userProfile.data));
             setIsLoggedIn(true);
+        } else {
+            setErrorMessage(
+                'Could not find user. Please make sure that you have an account or try again later.'
+            );
+            setIsLoggingFailed(true);
         }
 
         setIsPending(false);
