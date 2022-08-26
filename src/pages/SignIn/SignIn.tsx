@@ -82,16 +82,6 @@ function SignIn() {
 
         setIsPending(true);
 
-        // ! Typing test
-        // interface IRequestSuccess {
-        //     data: any;
-        //     isSuccess: boolean;
-        // }
-        // const requestResponse: IRequestSuccess | string = await genericPostRequest(
-        //     endpoint.userLoginEndpoint,
-        //     userLoginInfo
-        // );
-
         /* eslint-disable @typescript-eslint/no-explicit-any */
         const requestResponse: any = await genericPostRequest(
             endpoint.userLoginEndpoint,

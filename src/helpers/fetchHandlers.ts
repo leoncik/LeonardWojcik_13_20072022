@@ -8,7 +8,7 @@ import { IUserName } from '../interfaces/apiInterfaces';
  * @returns {boolean}
  */
 export const isStatusOk = (data: IUserProfile): boolean =>
-    data.status! < 300 && data.status! >= 200 ? true : false;
+    data.status! < 300 && data.status! >= 200;
 
 /**
  * Fetches data from url.
