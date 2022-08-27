@@ -50,7 +50,7 @@ Then install the dependencies :
 npm install
 ```
 
-4. You are ready to do !
+4. Congratulation, the backend is installed!
 
 ### 2 Install the frontend
 
@@ -68,7 +68,7 @@ Then install the dependencies :
 yarn install
 ```
 
-3. You are ready to do !
+3. You are ready to go!
 
 ### Troubleshooting
 
