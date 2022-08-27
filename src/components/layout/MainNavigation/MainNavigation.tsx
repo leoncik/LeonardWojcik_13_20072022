@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
 
 // Assets
-import logo from '../../../assets/images/argentBankLogo.png';
+import logo from '../../../assets/images/argentBankLogo-x2.png';
 
 // Libraries
 import { Helmet } from 'react-helmet-async';
