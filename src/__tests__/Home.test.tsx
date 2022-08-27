@@ -3,7 +3,7 @@ import { render } from './customRender';
 import { describe, it, expect } from 'vitest';
 import Home from '../pages/Home/Home';
 
-describe('Testing user name display', () => {
+describe('Testing render of home component', () => {
     it('should display a greeting message.', () => {
         render(<Home />);
         const heroText = screen.getByText(
