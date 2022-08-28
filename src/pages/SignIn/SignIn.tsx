@@ -66,10 +66,12 @@ function SignIn() {
         // Check form fields
         if (!enteredName?.match(mailRegex)) {
             setErrorMessage('The format of the email address is invalid.');
+            setIsLoggingFailed(true);
             return;
         }
         if (enteredPassword?.trim().length === 0) {
             setErrorMessage('Please enter your password.');
+            setIsLoggingFailed(true);
             return;
         }
 
